@@ -49,6 +49,12 @@
   max-height: 65px;
 }
 
+/* @media only screen and (max-width: 600px) {
+  .table-container {
+    min-width: 700px;
+  }
+} */
+
 /* 
 tbody input {
   width: 70%;

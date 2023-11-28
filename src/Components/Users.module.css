@@ -1,6 +1,7 @@
 .mainContainer {
   height: 100vh;
   /* width: 95%; */
+  min-width: 700px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,11 +15,13 @@
 .detailsContainer {
   /* position: relative; */
   /* top: 5rem; */
+  position: absolute;
+  top: 5rem;
   width: 90%;
   /* min-width: 640px; */
   /* height: calc(100vh - 15rem); */
   /* margin: auto; */
-  height: 80%;
+  height: 85vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,8 +44,8 @@
 .button-del {
   position: absolute;
   /* position: absolute; */
-  /* left: 0; */
-  left: 5%;
+  left: 0;
+  /* left: 5%; */
   cursor: pointer;
   /* padding: 7px 10px; */
   padding: 0.4rem 0.5rem;
@@ -66,7 +69,7 @@
 
 @media only screen and (max-width: 800px) {
   .button-del {
-    position: static;
+    position: initial;
     /* left: auto; */
     /* cursor: pointer;
     padding: 7px 10px;
@@ -78,30 +81,24 @@
 }
 
 @media only screen and (max-height: 1000px) {
-  .mainContainer {
-    overflow-x: scroll;
-  }
+  /* .mainContainer { */
+  /* overflow-x: scroll; */
+  /* } */
 
   .detailsContainer {
     position: absolute;
-    top: 0;
-    left: auto;
-    height: 100vh;
+    /* top: 0; */
+    /* left: auto; */
+    /* min-height: 90vh; */
+    min-height: 810px;
   }
 }
 
 @media only screen and (max-width: 660px) {
   .detailsContainer {
-    /* width: 100%; */
+    width: 650px;
+    position: absolute;
+    left: 0;
+    /* width: ; */
   }
-  /* min-width: 650px; */
-  /* width:  */
-  /* position: static; */
-  /* left: auto; */
-  /* cursor: pointer;
-      padding: 7px 10px;
-      background-color: transparent;
-      border: 2px solid rgb(255, 25, 25);
-      border-radius: 20px;
-      color: rgb(255, 25, 25); */
 }
