@@ -1,0 +1,75 @@
+.recordsContainer {
+  /* display: flex;
+  flex-direction: column;
+  gap: 2rem; */
+}
+
+.table-container {
+  height: 80%;
+  width: 100%;
+}
+
+.records {
+  /* min-height: 40rem; */
+  /* margin: 0 auto; */
+
+  border-collapse: collapse;
+  text-align: left;
+  width: 100%;
+}
+
+.records td:nth-child(1) {
+  width: 10%;
+}
+.records td:nth-child(2) {
+  width: 25%;
+}
+.records td:nth-child(3) {
+  width: 25%;
+}
+.records td:nth-child(4) {
+  width: 20%;
+}
+.records td:nth-child(5) {
+  width: 20%;
+}
+
+/* .records thead {
+  min-height: 5rem;
+} */
+
+.records tbody {
+  min-height: 90%;
+}
+
+.records thead tr,
+.records tbody tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  height: 60px;
+  max-height: 65px;
+}
+
+/* 
+tbody input {
+  width: 70%;
+  padding: 5 rem;
+} */
+
+/* tbody tr {
+  height: 66px;
+  overflow: auto;
+  overflow-x: hidden;
+  border: 1px solid black;
+} */
+
+/* .records thead tr {
+  border-bottom: 2px solid black;
+  min-height: 2rem;
+  max-height: 2rem;
+}
+
+.records tbody tr {
+  border-bottom: 2px solid black;
+  min-height: 2rem;
+  max-height: 2rem;
+} */

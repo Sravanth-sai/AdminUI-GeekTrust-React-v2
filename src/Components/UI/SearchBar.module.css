@@ -1,0 +1,21 @@
+.form {
+  width: 100%;
+}
+
+.actions {
+  width: inherit;
+  padding: 0.7rem;
+  border: 2px solid #d8d8d8;
+  border-radius: 20px;
+  color: #7e7e7e;
+  font-size: 18px;
+  /* box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.1); */
+  transition: all 250ms;
+}
+
+.actions:focus {
+  outline: none;
+  transform: translateY(-1px);
+  box-shadow: 7px 7px 15px rgba(0, 0, 0, 0.11),
+    -2px -2px 15px rgba(0, 0, 0, 0.08);
+}

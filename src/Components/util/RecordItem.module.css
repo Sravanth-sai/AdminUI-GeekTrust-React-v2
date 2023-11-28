@@ -1,0 +1,84 @@
+/* .recordItem {
+  height: 60px;
+  max-height: 65px;
+} */
+
+.recordItem td input {
+  transition: all 5s;
+}
+
+.recordInput {
+  padding: 0.5rem;
+  border: 2px solid #c4c4c4;
+  border-radius: 20px;
+  color: #3a3939;
+  font: inherit;
+  transition: all 5s;
+}
+
+.recordInput:focus {
+  outline: none;
+  padding: 0.5rem;
+  border-radius: 20px;
+}
+
+.recordItem td {
+  text-align: left;
+}
+
+.actionsContainer {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.actions {
+  background: transparent;
+  padding: 0.25rem 0.6rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.actions-alter {
+  background: transparent;
+  border: 2px solid rgb(0, 140, 255);
+  width: 3.7rem;
+}
+
+.actions-del {
+  border: 2px solid rgb(255, 25, 25);
+  color: rgb(255, 25, 25);
+  width: 4.5rem;
+}
+
+.actions:hover,
+.actions:focus {
+  color: white;
+  outline: none;
+  scale: 1.1;
+}
+
+.actions:active {
+  scale: 0.95;
+}
+
+.actions-alter:hover,
+.actions-alter:focus {
+  background-color: rgb(0, 140, 255);
+}
+
+.actions-del:hover,
+.actions-del:focus {
+  background-color: rgb(255, 25, 25);
+}
+
+.actions:disabled {
+  background-color: #ebebeb;
+  color: #8f8f8f;
+  border: 2px solid grey;
+}
+.actions:disabled:hover,
+.actions:disabled:focus {
+  scale: 1;
+}

@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+
+import Users from "./Components/Users";
+
+import UserProvider from "./store/UserProvider";
+
+import "./App.css";
+import TESTDeleteModal from "./Components/Modal/TESTDeleteModal";
 
 function App() {
+  const [showDeleteModal, setShowDeleteModal] = useState(true);
+
+  const closeDeleteModalHandler = () => {
+    setShowDeleteModal(false);
+  };
+
+  const showDeleteModalHandler = () => {
+    setShowDeleteModal(true);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserProvider>
+      {/* <h1>Hello world!</h1> */}
+      {/* {showDeleteModal && <TESTDeleteModal onClose={closeDeleteModalHandler} />} */}
+
+      <Users />
+    </UserProvider>
   );
 }
 
