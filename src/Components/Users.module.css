@@ -81,10 +81,6 @@
 }
 
 @media only screen and (max-height: 1000px) {
-  /* .mainContainer { */
-  /* overflow-x: scroll; */
-  /* } */
-
   .detailsContainer {
     position: absolute;
     /* top: 0; */
