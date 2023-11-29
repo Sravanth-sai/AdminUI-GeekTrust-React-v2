@@ -27,6 +27,7 @@
 
 .records tbody {
   min-height: 90%;
+  font-weight: 300;
 }
 
 .records thead tr,

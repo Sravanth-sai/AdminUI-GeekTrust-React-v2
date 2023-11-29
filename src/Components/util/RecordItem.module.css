@@ -46,12 +46,12 @@
 
 .actions-alter {
   background: transparent;
-  border: 2px solid rgb(0, 140, 255);
+  border: 1.7px solid rgb(0, 140, 255);
   width: 3.7rem;
 }
 
 .actions-del {
-  border: 2px solid rgb(255, 25, 25);
+  border: 1.7px solid rgb(255, 25, 25);
   color: rgb(255, 25, 25);
   width: 4.5rem;
 }

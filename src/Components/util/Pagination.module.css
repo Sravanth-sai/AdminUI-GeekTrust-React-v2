@@ -39,7 +39,6 @@
 
 .pages-container {
   display: flex;
-  list-style: none;
   height: inherit;
   flex-wrap: wrap;
   /* padding: auto 0; */
@@ -53,7 +52,6 @@
   align-items: center; */
   /* justify-self: center; */
   cursor: pointer;
-  list-style: none;
   background-color: rgb(240, 240, 240);
   color: black;
   /* border: 2px solid rgb(33, 143, 233); */
@@ -63,7 +61,7 @@
   /* margin-top: 2px; */
   padding-top: 0.24rem;
   /* border: 2px solid transparent; */
-  /* font-size: 17px; */
+  font-size: 17px;
   text-align: center;
   /* vertical-align: bottom; */
   transition: all 200ms;
@@ -75,6 +73,7 @@
   scale: 1.05;
   border: 2px solid rgb(33, 143, 233);
   color: rgb(33, 143, 233);
+  padding: auto;
 
   /* box-shadow: 1.5px 3px 5px 4px rgba(0, 0, 0, 0.2); */
 }
