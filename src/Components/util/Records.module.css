@@ -49,6 +49,15 @@
   max-height: 65px;
 }
 
+@media only screen and (max-width: 1000px) {
+  .records td:nth-child(1) {
+    width: 5%;
+  }
+  .records td:nth-child(3) {
+    width: 30%;
+  }
+}
+
 /* @media only screen and (max-width: 600px) {
   .table-container {
     min-width: 700px;
