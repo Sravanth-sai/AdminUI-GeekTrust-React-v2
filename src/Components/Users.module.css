@@ -44,12 +44,11 @@
 
 .button-del {
   position: absolute;
-  /* position: absolute; */
   left: 0;
   /* left: 5%; */
   cursor: pointer;
   /* padding: 7px 10px; */
-  padding: 0.4rem 0.5rem;
+  padding: 0.5rem 0.5rem;
   background-color: transparent;
   border: 2px solid rgb(255, 25, 25);
   border-radius: 20px;
@@ -68,18 +67,18 @@
   scale: 0.95;
 }
 
-@media only screen and (max-width: 800px) {
+/* @media only screen and (max-width: 800px) {
   .button-del {
-    position: initial;
-    /* left: auto; */
-    /* cursor: pointer;
+    position: initial; */
+/* left: auto; */
+/* cursor: pointer;
     padding: 7px 10px;
     background-color: transparent;
     border: 2px solid rgb(255, 25, 25);
     border-radius: 20px;
     color: rgb(255, 25, 25); */
-  }
-}
+/* }
+} */
 
 @media only screen and (max-height: 1000px) {
   .detailsContainer {
@@ -91,11 +90,17 @@
   }
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 850px) {
   .detailsContainer {
     width: 800px;
     /* position: absolute; */
     left: 20px;
     /* width: ; */
+  }
+
+  .button-del {
+    position: absolute;
+    /* position: absolute; */
+    left: 0;
   }
 }

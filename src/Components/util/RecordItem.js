@@ -143,6 +143,7 @@ function RecordItem(props) {
           type="checkbox"
           name={record.id}
           onChange={selectChangeHandler}
+          className={classes.recordCheckbox}
           // checked={props.allSelected}
           checked={props.isChecked}
         />

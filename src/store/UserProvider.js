@@ -119,7 +119,7 @@ const userReducer = (state, action) => {
     };
   }
 
-  if (action.type === "UPDATE_SELECTED_USERS") {
+  if (action.type === "UPDATE_SELECTED_USERS_LIST") {
     // const ids = action.users.map((user) => user.id);
 
     // const selectedUserIds = state.fetchedUsers.map((user) => {
@@ -342,7 +342,7 @@ const UserProvider = (props) => {
 
   const updateSelectedUsers = (users) => {
     dispatchUserAction({
-      type: "UPDATE_SELECTED_USERS",
+      type: "UPDATE_SELECTED_USERS_LIST",
       users: users.selectedUsers,
       allUsersSelected: users.allSelected,
     });

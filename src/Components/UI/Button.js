@@ -10,7 +10,10 @@ function Button(props) {
       //   type=""
       disabled={props.isDisabled}
       onClick={onClickHandler}
-      className={`${props.className} ${classes.defaultBtn}`}
+      // style={props.isDisabled ? { backgroundColor: "black" } : ""}
+      className={`${props.className} ${classes.defaultBtn} ${
+        props.isDisabled ? classes.disabledBtn : ""
+      }`}
     >
       {props.children}
     </button>

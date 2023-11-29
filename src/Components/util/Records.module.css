@@ -49,6 +49,11 @@
   max-height: 65px;
 }
 
+.recordCheckbox {
+  height: 1rem;
+  width: 1rem;
+}
+
 @media only screen and (max-width: 1000px) {
   .records td:nth-child(1) {
     width: 5%;

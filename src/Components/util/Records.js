@@ -132,7 +132,8 @@ function Records(props) {
                   name="Select-All"
                   onChange={selectChangeHandler}
                   checked={userCtx.allUsersSelected}
-                  className={classes["input-check"]}
+                  // className={classes["input-check"]}
+                  className={classes.recordCheckbox}
                   disabled={props.currentRecords.length === 0}
                 />
               </th>

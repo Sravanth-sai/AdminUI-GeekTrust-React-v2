@@ -3,17 +3,19 @@
   max-height: 65px;
 } */
 
-.recordItem td input {
-  transition: all 5s;
+.recordCheckbox {
+  height: 1rem;
+  width: 1rem;
 }
 
 .recordInput {
+  /* width: auto; */
   padding: 0.5rem;
   border: 2px solid #c4c4c4;
+  /* border: none; */
   border-radius: 20px;
   color: #3a3939;
   font: inherit;
-  transition: all 5s;
 }
 
 .recordInput:focus {

@@ -54,3 +54,16 @@
 .defaultBtn {
   transition: all 250ms;
 }
+
+.disabledBtn {
+  border-color: rgb(228, 227, 227);
+  color: #8f8f8f;
+  background-color: rgb(228, 227, 227);
+}
+
+.disabledBtn:hover,
+.disabledBtn:active {
+  color: #8f8f8f;
+  background-color: rgb(228, 227, 227);
+  scale: 1;
+}
