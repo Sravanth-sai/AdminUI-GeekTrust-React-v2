@@ -14,13 +14,10 @@
 
 .detailsContainer {
   /* position: relative; */
-  /* top: 5rem; */
   position: absolute;
   top: 5rem;
   width: 90%;
   /* min-width: 640px; */
-  /* height: calc(100vh - 15rem); */
-  /* margin: auto; */
   height: 85vh;
   display: flex;
   flex-direction: column;

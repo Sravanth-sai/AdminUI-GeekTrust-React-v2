@@ -1,15 +1,13 @@
-import Button from "../UI/Button";
-import Modal from "../UI/Modal";
+import { Fragment } from "react";
+
+import Button from "./UI/Button";
+import Modal from "./UI/Modal";
 
 import classes from "./DeleteModal.module.css";
 
 function DeleteModal(props) {
-  // const onClickHandler = (event) => {
-  //   event();
-  // }
-
   const content = (
-    <>
+    <Fragment>
       <h2>Are you sure to delete {props.user} user entry?</h2>
       <div className={classes.actionsContainer}>
         <Button
@@ -29,7 +27,7 @@ function DeleteModal(props) {
           Cancle
         </Button>
       </div>
-    </>
+    </Fragment>
   );
 
   return <Modal onClose={props.onClose}>{content}</Modal>;

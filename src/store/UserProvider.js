@@ -5,7 +5,7 @@ import UserContext from "./users-context";
 const initialState = {
   currentPage: 1,
   users: [], // For resetting fetched users to original State
-  // userPerPage: 10,
+  // userPerPage: 10, // To change users per page on the fly
   totalUserCount: 0,
   fetchedUsers: [],
   fetchedUserCount: 0,
@@ -16,6 +16,8 @@ const initialState = {
 };
 
 const userReducer = (state, action) => {
+  // Handles page change
+
   if (action.type === "CHANGE_PAGE") {
     return {
       ...state,
@@ -26,12 +28,9 @@ const userReducer = (state, action) => {
   }
 
   if (action.type === "FETCH_USERS_FIRST_TIME") {
-    // console.log(action.users);
     const updatedUsers = action.users.map((user) => {
       return { ...user, isChecked: false };
     });
-
-    // console.log("HERE ", updatedUsers);
 
     return {
       ...state,
@@ -43,16 +42,12 @@ const userReducer = (state, action) => {
     };
   }
 
-  // if (action.type === "UNSELECT_ALL_USERS") {
-  //   return {
-  //     ...state,
-  //     selectedUsers: [],
-  //   };
-  // }
+  // Handles Updation of Users
 
   if (action.type === "UPDATE_USER") {
-    // console.log("UPDATE");
+    // To update total users list
     let updatedTotalUsers = state.users;
+    // To update only fetched users (searched users)
     let updatedFetchedUsers = state.fetchedUsers;
     let i = 0;
     let j = 0;
@@ -84,12 +79,9 @@ const userReducer = (state, action) => {
     };
   }
 
-  // Handles Fetch Users query
+  // Handles Fetch Users by 'keyword'
 
   if (action.type === "FETCH_USERS") {
-    // console.log(action.key);
-
-    console.log("HERE ", state.fetchedUsers);
     if (action.key.trim() === "") {
       return {
         ...state,
@@ -107,8 +99,6 @@ const userReducer = (state, action) => {
       );
     });
 
-    console.log("INSIDE SEARCH ", fetchedUsers);
-
     return {
       ...state,
       currentPage: 1,
@@ -119,79 +109,28 @@ const userReducer = (state, action) => {
     };
   }
 
+  // Handles storing of selected users
+
   if (action.type === "UPDATE_SELECTED_USERS_LIST") {
-    // const ids = action.users.map((user) => user.id);
-
-    // const selectedUserIds = state.fetchedUsers.map((user) => {
-    //   return user.id;
-    // });
-
-    // console.log(selectedUserIds);
-
-    // console.log(ids);
-
     let users = state.fetchedUsers;
 
-    console.log("IN Ctx ", action);
-    console.log("IN FETCHED USERS ", users);
-
-    const usersMap = new Map(action.users.map((e) => [e.id, e]));
+    // Creats a Map of users
+    const usersMap = new Map(action.users.map((user) => [user.id, user]));
 
     const updatedFetchedUsers = users.map((user) =>
       usersMap.has(user.id) ? usersMap.get(user.id) : user
     );
-
-    // let a = [];
-    // marr2.forEach((i) => a.push(i));
-
-    // console.log("AAA ", a);
-
-    // console.log("NEW ", marr2);
 
     return {
       ...state,
       fetchedUsers: updatedFetchedUsers,
       allUsersSelected: action.allUsersSelected,
     };
-
-    // if (action.allSelected) {
-    //   return {
-    //     ...state,
-    //     fetchedUsers: action.users,
-    //     // selectedUsers: action.users,
-    //   };
-    // } else {
-    //   let updatedFetchedUsers = state.fetchedUsers;
-    //   // let updatedTotalUsers = state.users;
-
-    //   updatedFetchedUsers = updatedFetchedUsers.map((user) => {
-    //     console.log(user.id, action.users.id);
-    //     if (user.id === action.users.id) {
-    //       return action.user;
-    //     }
-    //     return user;
-    //   });
-
-    //   // updatedTotalUsers = updatedTotalUsers.map(user => {
-    //   //   if (user.id === action.user.id) {
-    //   //     return action.user;
-    //   //   }
-    //   //   return user;
-    //   // });
-
-    //   console.log("AFTER Ctx ", updatedFetchedUsers);
-
-    //   return {
-    //     ...state,
-    //     // users: updatedTotalUsers,
-    //     fetchedUsers: updatedFetchedUsers,
-    //   };
-    // }
   }
 
+  // Handles deletion of User
+
   if (action.type === "REMOVE_USER") {
-    // console.log("REMOVE ", action.id);
-    // console.log(state);
     let updatedTotalUsers = state.users;
     let updatedFetchedUsers = state.fetchedUsers;
     let currentPage = state.currentPage;
@@ -204,25 +143,19 @@ const userReducer = (state, action) => {
       return user.id !== action.id;
     });
 
-    console.log("PROVIDER FETCHED => ", updatedFetchedUsers);
+    // if the last user of the last page was deleted, current page should be changed by -1
 
-    // if the last user was deleted current page should be moved back
     if (Math.ceil(updatedFetchedUsers.length / 10) < state.totalPageNumbers) {
       currentPage -= 1;
     }
 
     const startIdx = (currentPage - 1) * 10;
 
-    console.log("START ", startIdx);
-    console.log(updatedFetchedUsers);
-    console.log("CHECK ", updatedFetchedUsers.slice(startIdx, startIdx + 10));
-
     const allSelected = updatedFetchedUsers
       .slice(startIdx, startIdx + 10)
       .every((user) => user.isChecked);
 
     return {
-      // ...state,
       currentPage: currentPage,
       users: updatedTotalUsers,
       totalUserCount: updatedTotalUsers.length,
@@ -233,14 +166,15 @@ const userReducer = (state, action) => {
     };
   }
 
-  if (action.type === "REMOVE_SELECTED_USERS") {
-    console.log("FOR deletion ", action.users);
+  // Handles deletion of Multiple selected users
 
+  if (action.type === "REMOVE_SELECTED_USERS") {
     let updatedTotalUsers = state.users;
 
     let updatedFetchedUsers = state.fetchedUsers;
     let currentPage = state.currentPage;
 
+    // To check if atleast one user is selected for deletion
     let isSelectedAny = false;
 
     const usersMap = new Map(
@@ -253,17 +187,6 @@ const userReducer = (state, action) => {
     if (!isSelectedAny) {
       return { ...state };
     }
-
-    // updatedFetchedUsers = updatedFetchedUsers.filter(
-    //   (user) => usersMap[user.id]?.isChecked || false
-    //   // usersMap[user.id]?.isChecked || false
-    //   // usersMap.has(user.id) ? usersMap.user.isChecked
-    // );
-
-    console.log("MAP ", usersMap);
-    // console.log(usersMap.get(1));
-
-    console.log("BEFORE DELETION ", updatedFetchedUsers);
 
     updatedFetchedUsers = updatedFetchedUsers.filter(
       (user) => !usersMap.get(user.id)?.isChecked
@@ -313,7 +236,6 @@ const UserProvider = (props) => {
 
   //       addUsersFirstTime(data);
   //       // setUsers(data);
-  //       console.log(data);
   //     };
   //     fetchUsers();
   //   }, []);
@@ -335,7 +257,6 @@ const UserProvider = (props) => {
   const fetchUsers = (searchKey) => {
     dispatchUserAction({
       type: "FETCH_USERS",
-      // key: searchKey,
       key: searchKey.toLowerCase(),
     });
   };
@@ -346,12 +267,6 @@ const UserProvider = (props) => {
       users: users.selectedUsers,
       allUsersSelected: users.allSelected,
     });
-  };
-
-  const unSelectAllFetchedUsers = () => {
-    // dispatchUserAction({
-    //   type: "UNSELECT_ALL_USERS",
-    // });
   };
 
   const editUser = (id, updatedUser) => {
@@ -392,8 +307,6 @@ const UserProvider = (props) => {
     editUser: editUser,
     removeUser: removeUser,
     removeSelectedUsers,
-    // unSelectAllFetchedUsers: unSelectAllFetchedUsers,
-    // removeSelectedUser: userState.removeSelectedUser,
   };
 
   return (

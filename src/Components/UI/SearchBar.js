@@ -14,8 +14,6 @@ function SearchBar(props) {
     const searchInput = searchRef.current.value;
 
     userCtx.fetchUsers(searchInput);
-
-    // searchRef.current.value = "";
   };
 
   return (

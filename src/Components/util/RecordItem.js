@@ -3,15 +3,10 @@ import UserContext from "../../store/users-context";
 
 import classes from "./RecordItem.module.css";
 import Button from "../UI/Button";
-// import SearchRecords from "./SearchRecords";
 
 function RecordItem(props) {
   const [isEditing, setIsEditing] = useState(false);
   const [isInvalidEdit, setIsInvalidEdit] = useState(false);
-
-  // const [isChecked, setIsChecked] = useState(props.allSelected);
-
-  // const [isDeleting, setIdDeleting] = useState(false);
 
   const userCtx = useContext(UserContext);
 
@@ -33,36 +28,16 @@ function RecordItem(props) {
     event.preventDefault();
 
     setUpdatedName(event.target.value);
-    // setUpdatedName(nameInput.current.value);
-
-    // setIsInvalidEdit(event.target.value === "");
-
-    // checkInvalidInput(event.target.value === "");
-    // checkInvalidInput();
   };
 
   const emailChangeHandler = (event) => {
     event.preventDefault();
-
     setUpdatedEmail(event.target.value);
-    // setIsInvalidEdit(event.target.value === "");
-
-    // checkInvalidInput(event.target.value === "");
-    // checkInvalidInput();
-
-    // setIsInvalidEdit(event.target.value.trim().length === 0);
   };
 
   const roleChangeHandler = (event) => {
     event.preventDefault();
-
     setUpdatedRole(event.target.value);
-    // setIsInvalidEdit(event.target.value === "");
-
-    // checkInvalidInput(event.target.value === "");
-    // checkInvalidInput();
-
-    // setIsInvalidEdit(event.target.value.trim().length === 0);
   };
 
   const recordEditHandler = () => {
@@ -74,9 +49,6 @@ function RecordItem(props) {
       updatedName.trim().length === 0 ||
       updatedEmail.trim().length === 0 ||
       updatedRole.trim().length === 0
-      // nameInput.current.value.trim().length === 0 ||
-      // emailInput.current.value.trim().length === 0 ||
-      // roleInput.current.value.trim().length === 0
     ) {
       setIsInvalidEdit(true);
       return;
@@ -86,9 +58,6 @@ function RecordItem(props) {
       name: updatedName,
       email: updatedEmail,
       role: updatedRole,
-      // name: nameInput.current.value,
-      // email: emailInput.current.value,
-      // role: roleInput.current.value,
       isChecked: false,
     });
     setIsEditing(false);
@@ -96,19 +65,10 @@ function RecordItem(props) {
 
   const recordItemDeleteHandler = (id, username) => {
     props.deleteHandler(id, username);
-
-    // userCtx.removeUser(id);
   };
 
   const selectChangeHandler = (event) => {
-    // setIsChecked(event.target.checked);
-    // console.log(event.target.checked);
-
     props.selectChangeHandler(event);
-
-    // event.target.checked
-    //   ? props.onChecked(record.id)
-    //   : props.onUnChecked(record.id);
   };
 
   let content = (
