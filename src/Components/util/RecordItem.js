@@ -73,7 +73,7 @@ function RecordItem(props) {
 
   let content = (
     <Button
-      className={`${classes.actions} ${classes["actions-alter"]}`}
+      className={`edit ${classes.actions} ${classes["actions-alter"]}`}
       onClickHandler={() => {
         recordEditHandler(record.id);
       }}
@@ -85,7 +85,7 @@ function RecordItem(props) {
   if (isEditing) {
     content = (
       <Button
-        className={`${classes.actions} ${classes["actions-alter"]}`}
+        className={`save ${classes.actions} ${classes["actions-alter"]}`}
         isDisabled={isInvalidEdit}
         onClickHandler={() => {
           recordSaveHandler(record.id);
@@ -96,8 +96,14 @@ function RecordItem(props) {
     );
   }
 
+  let styles = `${classes.recordItem}`;
+
+  if (props.isChecked) {
+    styles += ` ${classes.recordChecked}`;
+  }
+
   return (
-    <tr key={record.id} className={classes.recordItem}>
+    <tr key={record.id} className={`${styles}`}>
       <td>
         <input
           type="checkbox"
@@ -148,7 +154,7 @@ function RecordItem(props) {
         <section className={classes.actionsContainer}>
           {content}
           <Button
-            className={`${classes.actions} ${classes["actions-del"]}`}
+            className={`delete ${classes.actions} ${classes["actions-del"]}`}
             onClickHandler={() => {
               recordItemDeleteHandler(record.id, record.name);
             }}

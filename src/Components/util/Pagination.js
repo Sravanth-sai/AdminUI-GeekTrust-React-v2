@@ -12,7 +12,7 @@ function Pagination(props) {
   if (props.totalPageNumbers <= 5) {
     content = pageNumbers.map((item, idx) => {
       return (
-        <li
+        <div
           className={`${classes.paginationItems} ${
             props.currentPage === item ? `${classes.activePage}` : ""
           }`}
@@ -24,7 +24,7 @@ function Pagination(props) {
           key={idx}
         >
           {item}
-        </li>
+        </div>
       );
     });
   } else {
@@ -36,29 +36,29 @@ function Pagination(props) {
     content = (
       <>
         {left && (
-          <li
+          <div
             className={`${classes.paginationItems}`}
             onClick={() => props.pageChange(currentPage - 1)}
             key={currentPage - 1}
           >
             {currentPage - 1}
-          </li>
+          </div>
         )}
-        <li
+        <div
           className={`${classes.paginationItems} ${classes.activePage}`}
           onClick={() => props.pageChange(currentPage)}
           key={currentPage}
         >
           {currentPage}
-        </li>
+        </div>
         {right && (
-          <li
+          <div
             className={`${classes.paginationItems}`}
             onClick={() => props.pageChange(currentPage + 1)}
             key={currentPage + 1}
           >
             {currentPage + 1}
-          </li>
+          </div>
         )}
       </>
     );
@@ -101,6 +101,7 @@ function Pagination(props) {
   return (
     <section className={classes.pageNav}>
       <button
+        className="first-page"
         onClick={() => {
           props.onPrevPage({ toFirst: true });
         }}
@@ -109,15 +110,17 @@ function Pagination(props) {
         &lt;&lt;
       </button>
       <button
+        className="previous-page"
         onClick={props.onPrevPage}
         disabled={props.currentPage === 1 || props.totalPageNumbers === 0}
       >
-        {/* < */}
-        {"<"}
+        &lt;
       </button>
-      <div className={classes["pages-container"]}>{content}</div>
+      {/* <div className={classes["pages-container"]}>{content}</div> */}
+      {content}
 
       <button
+        className="next-page"
         onClick={props.onNextPage}
         disabled={
           props.currentPage === props.totalPageNumbers ||
@@ -127,6 +130,7 @@ function Pagination(props) {
         &gt;
       </button>
       <button
+        className="last-page"
         onClick={() => {
           props.onNextPage({ toLast: true });
         }}

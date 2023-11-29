@@ -26,6 +26,10 @@
   text-align: left;
 }
 
+.recordChecked {
+  background-color: rgb(218, 218, 218);
+}
+
 .actionsContainer {
   display: flex;
   gap: 1.5rem;

@@ -20,6 +20,7 @@
 
 .defaultBtn {
   transition: all 250ms;
+  font-weight: 500;
 }
 
 .disabledBtn {
