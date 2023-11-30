@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
 import UserContext from "../../store/users-context";
 
-import classes from "./Records.module.css";
+import classes from "./UserRecords.module.css";
 import RecordItem from "./RecordItem";
-import DeleteModal from "../DeleteModal";
+import UserDeleteModal from "../UserDeleteModal";
 
 function Records(props) {
   const userCtx = useContext(UserContext);
@@ -22,29 +22,40 @@ function Records(props) {
     setShowDeleteModal(false);
   };
 
+  // Handles selction of all users and calls the update func using context
+  const selectAllUsers = (isChecked) => {
+    const records = props.currentRecords.map((record) => {
+      return { ...record, isChecked: isChecked };
+    });
+    //   setSelectedRecords(records);
+    const users = { selectedUsers: records, allSelected: isChecked };
+    userCtx.updateSelectedUsers(users);
+  };
+
+  // Handles selction of single user
+
+  const selectUser = (eventName, isChecked) => {
+    // To check the shortcut checkbox when all fetched users are selected by maintaining it's state
+    let allSelected = true;
+    const records = props.currentRecords.map((record) => {
+      let newRecord = record;
+      if (record.id === eventName) {
+        newRecord = { ...newRecord, isChecked };
+      }
+      allSelected = allSelected && newRecord.isChecked;
+      return newRecord;
+    });
+    const users = { selectedUsers: records, allSelected };
+    userCtx.updateSelectedUsers(users);
+  };
+
   const selectChangeHandler = (event) => {
     const { name: eventName, checked: isChecked } = event.target;
 
     if (eventName === "Select-All") {
-      //   setAllRecordsSelected(isChecked);
-      const records = props.currentRecords.map((record) => {
-        return { ...record, isChecked: isChecked };
-      });
-      //   setSelectedRecords(records);
-      const users = { selectedUsers: records, allSelected: isChecked };
-      userCtx.updateSelectedUsers(users);
+      selectAllUsers(isChecked);
     } else {
-      let allSelected = true;
-      const records = props.currentRecords.map((record) => {
-        let newRecord = record;
-        if (record.id === eventName) {
-          newRecord = { ...newRecord, isChecked };
-        }
-        allSelected = allSelected && newRecord.isChecked;
-        return newRecord;
-      });
-      const users = { selectedUsers: records, allSelected };
-      userCtx.updateSelectedUsers(users);
+      selectUser(eventName, isChecked);
     }
   };
 
@@ -101,7 +112,7 @@ function Records(props) {
       </div>
 
       {showDeleteModal && (
-        <DeleteModal
+        <UserDeleteModal
           onClose={() => setShowDeleteModal(false)}
           user={userState.userName}
           deleteHandler={confirmedRecordDeleteHandler}

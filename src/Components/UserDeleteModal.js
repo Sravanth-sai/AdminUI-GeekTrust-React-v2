@@ -3,9 +3,9 @@ import { Fragment } from "react";
 import Button from "./UI/Button";
 import Modal from "./UI/Modal";
 
-import classes from "./DeleteModal.module.css";
+import classes from "./UserDeleteModal.module.css";
 
-function DeleteModal(props) {
+function UserDeleteModal(props) {
   const content = (
     <Fragment>
       <h2>Are you sure to delete {props.user} user entry?</h2>
@@ -33,4 +33,4 @@ function DeleteModal(props) {
   return <Modal onClose={props.onClose}>{content}</Modal>;
 }
 
-export default DeleteModal;
+export default UserDeleteModal;

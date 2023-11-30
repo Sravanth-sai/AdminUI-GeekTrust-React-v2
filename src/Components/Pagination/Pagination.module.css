@@ -1,0 +1,52 @@
+.pageNav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  height: 35px;
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.paginationItems {
+  padding: 0;
+  line-height: 0px;
+  cursor: pointer;
+  background-color: rgb(0, 140, 255);
+  font: inherit;
+  font-size: 19px;
+
+  color: white;
+  border-radius: 50%;
+  border: none;
+
+  height: inherit;
+  width: 35px;
+  text-align: center;
+  transition: background-color 100ms, scale 250ms;
+}
+
+.paginationItems:focus,
+.paginationItems:hover {
+  outline: none;
+  /* background-color: rgb(45, 160, 253); */
+
+  background-color: rgb(40, 158, 255);
+  scale: 1.05;
+}
+
+.paginationItems:active {
+  scale: 0.95;
+}
+
+.first-page:hover,
+.previous-page:hover,
+.next-page:hover,
+.last-page:hover {
+  color: white;
+}
+
+.paginationItems:disabled {
+  background-color: rgb(174, 186, 196);
+  /* color: rgb(131, 131, 131); */
+}
