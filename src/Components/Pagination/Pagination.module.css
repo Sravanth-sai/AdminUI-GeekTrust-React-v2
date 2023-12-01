@@ -2,10 +2,10 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 1.6rem;
   height: 35px;
   font-weight: 300;
-  font-size: 18px;
+  /* font-size: 18px; */
 }
 
 .paginationItems {
