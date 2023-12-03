@@ -8,7 +8,7 @@ const UserContext = React.createContext({
   fetchedUserCount: 0,
   totalPageNumbers: 0,
   allUsersSelected: false,
-  // selectedUsers: [],
+  selectedUserCount: 0,
   changePage: (page) => {},
   addUsersFirstTime: (users) => {},
   fetchUsers: (searchKey) => {},

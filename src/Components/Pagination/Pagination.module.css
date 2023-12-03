@@ -2,10 +2,11 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1.6rem;
-  height: 35px;
+  gap: 1.5rem;
+  height: 2.5rem;
   font-weight: 300;
-  /* font-size: 18px; */
+  font-size: 25px;
+  transition: all 200ms;
 }
 
 .paginationItems {
@@ -13,7 +14,7 @@
   line-height: 0px;
   cursor: pointer;
   background-color: rgb(0, 140, 255);
-  font: inherit;
+  /* font: inherit; */
   font-size: 19px;
 
   color: white;
@@ -21,8 +22,8 @@
   border: none;
 
   height: inherit;
-  width: 35px;
-  text-align: center;
+  width: 2.5rem;
+  /* text-align: center; */
   transition: background-color 100ms, scale 250ms;
 }
 
@@ -47,6 +48,27 @@
 }
 
 .paginationItems:disabled {
-  background-color: rgb(174, 186, 196);
-  /* color: rgb(131, 131, 131); */
+  /* background-color: rgb(174, 186, 196); */
+  background-color: #f0f0f0;
+  cursor: default;
+  color: rgb(131, 131, 131);
+}
+
+.paginationItems:hover,
+.paginationItems:focus,
+.paginationItems:active {
+  scale: 1;
+}
+
+@media only screen and (max-width: 1000px) {
+  .pageNav {
+    margin-left: 7rem;
+    gap: 2rem;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  /* .pageNav {
+    margin-left: 7rem;
+  } */
 }

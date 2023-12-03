@@ -1,13 +1,14 @@
-// import SearchBar from "./Components/SearchBar/SearchBar";
-import Users from "./Components/Users";
-import UserProvider from "./store/UserProvider";
+import Search from "./Components/Search/Search";
+import User from "./Components/User/User";
+import UserProvider from "./store/User/UserProvider";
 
 function App() {
+  console.log("APP Rendered");
+
   return (
     <UserProvider>
-      {/* <SearchBar /> */}
-
-      <Users />
+      <Search />
+      <User />
     </UserProvider>
   );
 }

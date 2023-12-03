@@ -1,6 +1,6 @@
 import { useReducer } from "react";
 
-import UserContext from "./users-context";
+import UserContext from "./user-context";
 
 const initialState = {
   currentPage: 1,
@@ -12,7 +12,7 @@ const initialState = {
   totalPageNumbers: 0,
 
   allUsersSelected: false,
-  // selectedUsersCount: [],
+  selectedUserCount: 0,
 };
 
 const userReducer = (state, action) => {
@@ -21,7 +21,8 @@ const userReducer = (state, action) => {
   if (action.type === "CHANGE_PAGE") {
     return {
       ...state,
-      fetchedUsers: state.users,
+      // fetchedUsers: state.users,
+      fetchedUsers: state.fetchedUsers,
       currentPage: action.page,
       allUsersSelected: false,
     };
@@ -31,6 +32,8 @@ const userReducer = (state, action) => {
     const updatedUsers = action.users.map((user) => {
       return { ...user, isChecked: false };
     });
+
+    console.log("INITIAL STATE ", state);
 
     return {
       ...state,
@@ -82,6 +85,7 @@ const userReducer = (state, action) => {
   // Handles Fetch Users by 'keyword'
 
   if (action.type === "FETCH_USERS") {
+    console.log("HERE 2");
     if (action.key.trim() === "") {
       return {
         ...state,
@@ -112,19 +116,46 @@ const userReducer = (state, action) => {
   // Handles storing of selected users
 
   if (action.type === "UPDATE_SELECTED_USERS_LIST") {
-    let users = state.fetchedUsers;
+    let fetchedUsers = state.fetchedUsers;
+    let users = state.users;
+
+    let selectedUserCount = 0;
 
     // Creats a Map of users
     const usersMap = new Map(action.users.map((user) => [user.id, user]));
 
-    const updatedFetchedUsers = users.map((user) =>
-      usersMap.has(user.id) ? usersMap.get(user.id) : user
+    const updatedTotalUsers = users.map(
+      (user) => {
+        if (usersMap.has(user.id)) {
+          let updatedUser = usersMap.get(user.id);
+          selectedUserCount += updatedUser.isChecked ? 1 : 0;
+          return updatedUser;
+        }
+        selectedUserCount += user.isChecked ? 1 : 0;
+        return user;
+      }
+      // usersMap.has(user.id) ? usersMap.get(user.id) : user
     );
+
+    const updatedFetchedUsers = fetchedUsers.map(
+      (user) => {
+        if (usersMap.has(user.id)) {
+          return usersMap.get(user.id);
+        }
+        return user;
+      }
+      // usersMap.has(user.id) ?  : user
+    );
+
+    console.log("SELECCTED USRES ", selectedUserCount);
 
     return {
       ...state,
+      users: updatedTotalUsers, // New Line
+      // users: updatedFetchedUsers, // New Line
       fetchedUsers: updatedFetchedUsers,
       allUsersSelected: action.allUsersSelected,
+      selectedUserCount,
     };
   }
 
@@ -169,9 +200,11 @@ const userReducer = (state, action) => {
   // Handles deletion of Multiple selected users
 
   if (action.type === "REMOVE_SELECTED_USERS") {
+    // New Commented lines
     let updatedTotalUsers = state.users;
 
-    let updatedFetchedUsers = state.fetchedUsers;
+    // let updatedFetchedUsers = state.fetchedUsers;
+
     let currentPage = state.currentPage;
 
     // To check if atleast one user is selected for deletion
@@ -188,29 +221,39 @@ const userReducer = (state, action) => {
       return { ...state };
     }
 
-    updatedFetchedUsers = updatedFetchedUsers.filter(
-      (user) => !usersMap.get(user.id)?.isChecked
-    );
+    // New commented users
+
+    // updatedFetchedUsers = updatedFetchedUsers.filter(
+    //   (user) => !usersMap.get(user.id)?.isChecked
+    // );
 
     updatedTotalUsers = updatedTotalUsers.filter(
       (user) => !usersMap.get(user.id)?.isChecked
     );
 
-    if (
-      Math.ceil(updatedTotalUsers.length / 10) < state.totalPageNumbers &&
-      currentPage !== 1
-    ) {
+    const updatedPageNumbers = Math.ceil(updatedTotalUsers.length / 10);
+
+    if (updatedPageNumbers < state.totalPageNumbers && currentPage !== 1) {
       currentPage -= 1;
     }
+    if (currentPage > updatedPageNumbers) {
+      currentPage = updatedPageNumbers;
+    }
+
+    console.log(currentPage, state.totalPageNumbers);
 
     return {
       currentPage: currentPage,
       users: updatedTotalUsers,
-      fetchedUsers: updatedFetchedUsers,
+      fetchedUsers: updatedTotalUsers,
+      // fetchedUsers: updatedFetchedUsers,
       totalUserCount: updatedTotalUsers.length,
-      fetchedUserCount: updatedFetchedUsers.length,
-      totalPageNumbers: Math.ceil(updatedFetchedUsers.length / 10),
+      // fetchedUserCount: updatedFetchedUsers.length,
+      fetchedUserCount: updatedTotalUsers.length,
+      // totalPageNumbers: Math.ceil(updatedFetchedUsers.length / 10),
+      totalPageNumbers: updatedPageNumbers,
       allUsersSelected: false,
+      selectedUserCount: 0,
     };
   }
 };
@@ -299,7 +342,7 @@ const UserProvider = (props) => {
     fetchedUserCount: userState.fetchedUserCount,
     totalPageNumbers: userState.totalPageNumbers,
     allUsersSelected: userState.allUsersSelected,
-    // selectedUsers: userState.selectedUsers,
+    selectedUserCount: userState.selectedUserCount,
     changePage,
     addUsersFirstTime,
     fetchUsers,

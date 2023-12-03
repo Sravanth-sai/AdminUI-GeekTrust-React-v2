@@ -1,6 +1,8 @@
 import classes from "./Pages.module.css";
 
 function Pages(props) {
+  console.log("PAGES (NUMBERS) Rendered");
+
   let pageNumbers = [];
 
   for (let i = 1; i <= props.totalPageNumbers; i++) {
@@ -8,6 +10,7 @@ function Pages(props) {
   }
 
   let content;
+  // To handle if no. of pages is high
 
   if (props.totalPageNumbers <= 5) {
     content = pageNumbers.map((item, idx) => {

@@ -1,15 +1,22 @@
-import { useState, useContext } from "react";
-import UserContext from "../../store/users-context";
+import { useState, useContext, useEffect } from "react";
+import UserContext from "../../store/User/user-context";
+import classes from "./Table.module.css";
+import TableItem from "./TableItem";
+import UserDeleteModal from "../User/UserDeleteModal";
+import UserEditProvider from "../../store/UserEdit/UserEditProvider";
 
-import classes from "./UserRecords.module.css";
-import RecordItem from "./RecordItem";
-import UserDeleteModal from "../UserDeleteModal";
+function Table(props) {
+  console.log("Table Rendered");
 
-function Records(props) {
   const userCtx = useContext(UserContext);
-
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [userState, setUserState] = useState({});
+  const [isAllSelected, setIsAllSelected] = useState(userCtx.allUsersSelected);
+  // const [isAllSelected, setIsAllSelected] = useState(false);
+
+  useEffect(() => {
+    setIsAllSelected(props.currentRecords.every((user) => user.isChecked));
+  }, [props.currentRecords]);
 
   const recordDeleteHandler = (id, userName) => {
     setShowDeleteModal(true);
@@ -38,6 +45,7 @@ function Records(props) {
     // To check the shortcut checkbox when all fetched users are selected by maintaining it's state
     let allSelected = true;
     const records = props.currentRecords.map((record) => {
+      // const records = userCtx.users.map((record) => {
       let newRecord = record;
       if (record.id === eventName) {
         newRecord = { ...newRecord, isChecked };
@@ -59,34 +67,44 @@ function Records(props) {
     }
   };
 
+  let content = "No records found.";
+
+  if (props.isError) {
+    content = "Unable to fetch users at the moment, try again later!";
+  } else if (props.isLoading) {
+    content = "Loading...";
+  }
+
   return (
     <>
-      <div className={classes["table-container"]}>
-        <table className={classes.records}>
-          <thead>
-            <tr>
-              <th>
-                <input
-                  type="checkbox"
-                  name="Select-All"
-                  onChange={selectChangeHandler}
-                  checked={userCtx.allUsersSelected}
-                  className={classes.recordCheckbox}
-                  disabled={props.currentRecords.length === 0}
-                />
-              </th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+      {/* <div className={classes["table-container"]}> */}
+      <table className={classes.records}>
+        <thead>
+          <tr>
+            <th>
+              <input
+                type="checkbox"
+                name="Select-All"
+                onChange={selectChangeHandler}
+                // checked={userCtx.allUsersSelected}
+                checked={isAllSelected}
+                className={classes.recordCheckbox}
+                disabled={props.currentRecords.length === 0}
+              />
+            </th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
 
-          <tbody>
-            {props.currentRecords.length > 0 &&
-              props.currentRecords.map((record) => {
-                return (
-                  <RecordItem
+        <tbody>
+          {props.currentRecords.length > 0 &&
+            props.currentRecords.map((record) => {
+              return (
+                <UserEditProvider>
+                  <TableItem
                     key={record.id}
                     record={record}
                     deleteHandler={recordDeleteHandler}
@@ -94,23 +112,19 @@ function Records(props) {
                     allSelected={userCtx.allUsersSelected}
                     isChecked={record.isChecked}
                   />
-                );
-              })}
+                </UserEditProvider>
+              );
+            })}
 
-            {props.currentRecords.length === 0 && (
-              <tr className={classes.noRecords}>
-                <td align="center" colSpan={5}>
-                  {/* {props.isLoading && "Loading..."} */}
-                  {props.isError
-                    ? "Unable to fetch users at the moment, try again later!"
-                    : "No records found!"}
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-
+          {props.currentRecords.length === 0 && (
+            <tr className={classes.noRecords}>
+              <td align="center" colSpan={5}>
+                <p className={classes.status}>{content}</p>
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
       {showDeleteModal && (
         <UserDeleteModal
           onClose={() => setShowDeleteModal(false)}
@@ -122,4 +136,4 @@ function Records(props) {
   );
 }
 
-export default Records;
+export default Table;

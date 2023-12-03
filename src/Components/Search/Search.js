@@ -1,19 +1,24 @@
 import { useRef, useContext } from "react";
 
-import UserContext from "../../store/users-context";
+import UserContext from "../../store/User/user-context";
 
-import classes from "./SearchBar.module.css";
+import classes from "./Search.module.css";
 
-function SearchBar(props) {
+function Search(props) {
+  console.log("Search Rendered");
+
   const userCtx = useContext(UserContext);
-
   const searchRef = useRef(null);
 
   const searchHandler = (event) => {
     event.preventDefault();
-    const searchInput = searchRef.current.value;
 
-    userCtx.fetchUsers(searchInput);
+    const timer = setTimeout(() => {
+      userCtx.fetchUsers(searchRef.current.value);
+    }, 500);
+    return () => {
+      clearTimeout(timer);
+    };
   };
 
   return (
@@ -28,4 +33,4 @@ function SearchBar(props) {
   );
 }
 
-export default SearchBar;
+export default Search;

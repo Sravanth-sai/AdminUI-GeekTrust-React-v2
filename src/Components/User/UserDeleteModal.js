@@ -1,31 +1,30 @@
 import { Fragment } from "react";
-
-import Button from "./UI/Button";
-import Modal from "./UI/Modal";
-
+import Modal from "../UI/Modal";
 import classes from "./UserDeleteModal.module.css";
 
 function UserDeleteModal(props) {
+  console.log("DELETE MODAL Rendered");
+
   const content = (
     <Fragment>
       <h2>Are you sure to delete {props.user} user entry?</h2>
       <div className={classes.actionsContainer}>
-        <Button
+        <button
           className={`${classes["button-alt"]} ${classes.actions}`}
-          onClickHandler={() => {
+          onClick={() => {
             props.deleteHandler();
           }}
         >
           Delete
-        </Button>
-        <Button
+        </button>
+        <button
           className={`${classes.primary} ${classes.actions}`}
-          onClickHandler={() => {
+          onClick={() => {
             props.onClose();
           }}
         >
-          Cancle
-        </Button>
+          Cancel
+        </button>
       </div>
     </Fragment>
   );

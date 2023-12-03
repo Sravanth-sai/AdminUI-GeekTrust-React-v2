@@ -31,13 +31,11 @@
 }
 
 .page {
-  /* height: inherit;
-  width: 35px;
-  border-radius: 50%; */
-  font-size: 17px;
-  font-weight: 400;
+  width: 2.5rem;
+  font-size: 18px;
   background-color: rgb(240, 240, 240);
   color: rgb(51, 51, 51);
+  font-weight: 500;
 }
 .page:hover,
 .page:focus {

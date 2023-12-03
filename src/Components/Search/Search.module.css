@@ -1,13 +1,15 @@
 .form {
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 3rem auto;
+  min-width: 750px;
 }
 
 .actions {
-  width: inherit;
+  width: 50%;
   padding: 0.7rem;
   border: 2px solid #d8d8d8;
-  border-radius: 20px;
-  color: #7e7e7e;
+  border-radius: 50rem;
   font-size: 18px;
   /* box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.1); */
   transition: all 250ms;
@@ -18,4 +20,10 @@
   transform: translateY(-1px);
   box-shadow: 7px 7px 15px rgba(0, 0, 0, 0.11),
     -2px -2px 15px rgba(0, 0, 0, 0.08);
+}
+
+@media only screen and (max-width: 1000px) {
+  .actions {
+    width: 70%;
+  }
 }

@@ -1,31 +1,45 @@
 import { useContext } from "react";
-import UserContext from "../../store/users-context";
+import UserContext from "../../store/User/user-context";
 import Pages from "./Pages";
 import classes from "./Pagination.module.css";
+import {
+  FaAngleDoubleLeft,
+  FaAngleDoubleRight,
+  FaAngleLeft,
+  FaAngleRight,
+} from "react-icons/fa";
 
 function Pagination(props) {
+  console.log("PAGINATION Rendered");
+
   const userCtx = useContext(UserContext);
 
-  const onPrevPageHandler = ({ toFirst }) => {
+  const onFirstPageHandler = () => {
     if (props.currentPage <= 1) {
       return;
     }
-    if (toFirst) {
-      userCtx.changePage(1);
-    } else {
-      userCtx.changePage(props.currentPage - 1);
-    }
+    userCtx.changePage(1);
   };
 
-  const onNextPageHandler = ({ toLast }) => {
-    if (props.currentPage >= props.totalPageNumbers) {
+  const onPrevPageHandler = () => {
+    if (props.currentPage <= 1) {
       return;
     }
-    if (toLast) {
-      userCtx.changePage(props.totalPageNumbers);
-    } else {
-      userCtx.changePage(props.currentPage + 1);
+    userCtx.changePage(props.currentPage - 1);
+  };
+
+  const onLastPageHandler = () => {
+    if (props.currentPage === props.totalPageNumbers) {
+      return;
     }
+    userCtx.changePage(props.totalPageNumbers);
+  };
+
+  const onNextPageHandler = () => {
+    if (props.currentPage === props.totalPageNumbers) {
+      return;
+    }
+    userCtx.changePage(props.currentPage + 1);
   };
 
   const pageChangeHandler = (page) => {
@@ -36,19 +50,18 @@ function Pagination(props) {
     <section className={classes.pageNav}>
       <button
         className={`${classes.paginationItems + " first-page"}`}
-        onClick={() => {
-          onPrevPageHandler({ toFirst: true });
-        }}
+        onClick={onFirstPageHandler}
         disabled={props.currentPage === 1 || props.totalPageNumbers === 0}
       >
-        &lt;&lt;
+        <FaAngleDoubleLeft />
       </button>
+
       <button
         className={`previous-page ${classes.paginationItems}`}
-        onClick={() => onPrevPageHandler({ toFirst: false })}
+        onClick={onPrevPageHandler}
         disabled={props.currentPage === 1 || props.totalPageNumbers === 0}
       >
-        &lt;
+        <FaAngleLeft />
       </button>
       {/* <div className={classes["pages-container"]}>{content}</div> */}
       <Pages
@@ -59,25 +72,23 @@ function Pagination(props) {
 
       <button
         className={`next-page ${classes.paginationItems}`}
-        onClick={() => onNextPageHandler({ toLast: false })}
+        onClick={onNextPageHandler}
         disabled={
           props.currentPage === props.totalPageNumbers ||
           props.totalPageNumbers === 0
         }
       >
-        &gt;
+        <FaAngleRight />
       </button>
       <button
         className={`last-page ${classes.paginationItems}`}
-        onClick={() => {
-          onNextPageHandler({ toLast: true });
-        }}
+        onClick={onLastPageHandler}
         disabled={
           props.currentPage === props.totalPageNumbers ||
           props.totalPageNumbers === 0
         }
       >
-        &gt;&gt;
+        <FaAngleDoubleRight />
       </button>
     </section>
   );

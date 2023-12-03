@@ -1,58 +1,51 @@
 .mainContainer {
   height: 100vh;
-  /* width: 95%; */
+  width: 100%;
   min-width: 700px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.mainContainer p {
-  margin: 40vh auto;
+  /* overflow: scroll; */
 }
 
 .detailsContainer {
   /* position: relative; */
-  position: absolute;
-  top: 5rem;
+  /* position: absolute; */
+  /* top: 5rem; */
+  margin: auto;
   width: 90%;
   /* min-width: 640px; */
-  height: 85vh;
+  /* height: 100%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 1.7rem;
 
   /* justify-content: flex-start; */
 }
 
-/* @media only screen and (max-width: 800px) {
-  .button-del {
-    position: initial; */
-/* left: auto; */
-/* cursor: pointer;
-    padding: 7px 10px;
-    background-color: transparent;
-    border: 2px solid rgb(255, 25, 25);
-    border-radius: 20px;
-    color: rgb(255, 25, 25); */
-/* }
-} */
-
 @media only screen and (max-height: 1000px) {
-  .detailsContainer {
+  /* .detailsContainer {
     position: absolute;
-    /* top: 0; */
-    /* left: auto; */
-    /* min-height: 90vh; */
+    top: 0;
+   left: auto;
+    min-height: 90vh;
     min-height: 810px;
+  } 
+  */
+}
+
+@media only screen and (max-width: 1000px) {
+  .detailsContainer {
+    width: 97%;
   }
 }
 
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 920px) {
   .detailsContainer {
-    width: 800px;
+    width: 900px;
     /* position: absolute; */
     left: 20px;
     /* width: ; */

@@ -1,0 +1,83 @@
+.footer {
+  display: flex;
+  align-items: center;
+  user-select: none;
+  justify-content: center;
+  /* gap: 2rem; */
+  flex-wrap: wrap;
+  /* height: auto; */
+  /* height: 5rem; */
+
+  /* justify-content: center; */
+}
+
+.actions {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 1rem;
+  position: absolute;
+  left: 5%;
+  transition: all 200ms linear;
+}
+
+.items {
+  font-size: 14px;
+  color: rgb(131, 131, 131);
+}
+
+.button-del {
+  cursor: pointer;
+  padding: 0.5rem 0.5rem;
+  background-color: transparent;
+  border: 0.18rem solid rgb(255, 25, 25);
+  border-radius: 20px;
+  color: rgb(255, 25, 25);
+  font: inherit;
+  transition: all 250ms;
+}
+
+.button-del:hover,
+.button-del:focus {
+  cursor: pointer;
+  color: white;
+  background-color: rgb(255, 25, 25);
+  scale: 1.05;
+}
+
+.button-del:active {
+  scale: 0.95;
+}
+
+.button-del:disabled {
+  background-color: #f0f0f0;
+  cursor: default;
+  color: #929292;
+  border: 2px solid #d6d6d6;
+}
+
+.button-del:disabled:hover {
+  cursor: default;
+  scale: 1;
+}
+
+.count {
+  color: rgb(255, 25, 25);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .actions {
+    position: absolute;
+    left: 2%;
+    gap: 0.3rem;
+  }
+}
+
+@media only screen and (max-width: 1210px) {
+  .actions {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+}
