@@ -100,10 +100,10 @@ function Table(props) {
         </thead>
 
         <tbody>
-          {props.currentRecords.length > 0 &&
-            props.currentRecords.map((record) => {
-              return (
-                <UserEditProvider>
+          <UserEditProvider>
+            {props.currentRecords.length > 0 &&
+              props.currentRecords.map((record) => {
+                return (
                   <TableItem
                     key={record.id}
                     record={record}
@@ -112,9 +112,9 @@ function Table(props) {
                     allSelected={userCtx.allUsersSelected}
                     isChecked={record.isChecked}
                   />
-                </UserEditProvider>
-              );
-            })}
+                );
+              })}
+          </UserEditProvider>
 
           {props.currentRecords.length === 0 && (
             <tr className={classes.noRecords}>

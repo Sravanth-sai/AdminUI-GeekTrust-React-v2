@@ -7,7 +7,6 @@ function Footer(props) {
   console.log("FOOTER Rendered");
 
   const userCtx = useContext(UserContext);
-
   const deleteMultipleUsersHandler = () => {
     // New line added
     // userCtx.removeSelectedUsers(props.currentPageUsers);
@@ -29,11 +28,10 @@ function Footer(props) {
   return (
     <div className={classes.footer}>
       <div className={classes.actions}>
-        <span className={classes.items}>
-          {console.log("COLOR ", usersSelected)}
+        <span className={classes.actionsText}>
           <span className={`${usersSelected !== 0 ? `${classes.count}` : ""}`}>
             {content}
-          </span>{" "}
+          </span>
           {` user(s) selected`}
         </span>
         <button

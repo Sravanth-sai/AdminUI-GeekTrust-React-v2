@@ -21,9 +21,9 @@
   transition: all 200ms linear;
 }
 
-.items {
-  font-size: 14px;
-  color: rgb(131, 131, 131);
+.actionsText {
+  font-size: 0.9rem;
+  color: rgb(95, 94, 94);
 }
 
 .button-del {
@@ -64,7 +64,7 @@
 .count {
   color: rgb(255, 25, 25);
   font-weight: 600;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 @media only screen and (max-width: 1000px) {

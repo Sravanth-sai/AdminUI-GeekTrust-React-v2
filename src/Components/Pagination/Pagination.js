@@ -12,34 +12,34 @@ import {
 function Pagination(props) {
   console.log("PAGINATION Rendered");
 
+  const { currentPage, totalPageNumbers } = props;
   const userCtx = useContext(UserContext);
-
   const onFirstPageHandler = () => {
-    if (props.currentPage <= 1) {
+    if (currentPage <= 1) {
       return;
     }
     userCtx.changePage(1);
   };
 
   const onPrevPageHandler = () => {
-    if (props.currentPage <= 1) {
+    if (currentPage <= 1) {
       return;
     }
-    userCtx.changePage(props.currentPage - 1);
+    userCtx.changePage(currentPage - 1);
   };
 
   const onLastPageHandler = () => {
-    if (props.currentPage === props.totalPageNumbers) {
+    if (currentPage === totalPageNumbers) {
       return;
     }
-    userCtx.changePage(props.totalPageNumbers);
+    userCtx.changePage(totalPageNumbers);
   };
 
   const onNextPageHandler = () => {
-    if (props.currentPage === props.totalPageNumbers) {
+    if (currentPage === totalPageNumbers) {
       return;
     }
-    userCtx.changePage(props.currentPage + 1);
+    userCtx.changePage(currentPage + 1);
   };
 
   const pageChangeHandler = (page) => {
@@ -49,44 +49,42 @@ function Pagination(props) {
   return (
     <section className={classes.pageNav}>
       <button
+        aria-label="Go to first page"
         className={`${classes.paginationItems + " first-page"}`}
         onClick={onFirstPageHandler}
-        disabled={props.currentPage === 1 || props.totalPageNumbers === 0}
+        disabled={currentPage === 1 || totalPageNumbers === 0}
       >
         <FaAngleDoubleLeft />
       </button>
 
       <button
+        aria-label="Go to previous page"
         className={`previous-page ${classes.paginationItems}`}
         onClick={onPrevPageHandler}
-        disabled={props.currentPage === 1 || props.totalPageNumbers === 0}
+        disabled={currentPage === 1 || totalPageNumbers === 0}
       >
         <FaAngleLeft />
       </button>
       {/* <div className={classes["pages-container"]}>{content}</div> */}
       <Pages
-        totalPageNumbers={props.totalPageNumbers}
-        currentPage={props.currentPage}
+        totalPageNumbers={totalPageNumbers}
+        currentPage={currentPage}
         onPageChange={pageChangeHandler}
       />
 
       <button
+        aria-label="Go to next page"
         className={`next-page ${classes.paginationItems}`}
         onClick={onNextPageHandler}
-        disabled={
-          props.currentPage === props.totalPageNumbers ||
-          props.totalPageNumbers === 0
-        }
+        disabled={currentPage === totalPageNumbers || totalPageNumbers === 0}
       >
         <FaAngleRight />
       </button>
       <button
+        aria-label="Go to last page"
         className={`last-page ${classes.paginationItems}`}
         onClick={onLastPageHandler}
-        disabled={
-          props.currentPage === props.totalPageNumbers ||
-          props.totalPageNumbers === 0
-        }
+        disabled={currentPage === totalPageNumbers || totalPageNumbers === 0}
       >
         <FaAngleDoubleRight />
       </button>
