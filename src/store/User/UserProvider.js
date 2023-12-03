@@ -165,8 +165,12 @@ const userReducer = (state, action) => {
     let updatedTotalUsers = state.users;
     let updatedFetchedUsers = state.fetchedUsers;
     let currentPage = state.currentPage;
+    let selectedUserCount = state.selectedUserCount;
 
     updatedTotalUsers = state.users.filter((user) => {
+      if (user.id === action.id) {
+        selectedUserCount -= user.isChecked ? 1 : 0;
+      }
       return user.id !== action.id;
     });
 
@@ -194,6 +198,7 @@ const userReducer = (state, action) => {
       fetchedUserCount: updatedFetchedUsers.length,
       totalPageNumbers: Math.ceil(updatedFetchedUsers.length / 10),
       allUsersSelected: allSelected,
+      selectedUserCount,
     };
   }
 
