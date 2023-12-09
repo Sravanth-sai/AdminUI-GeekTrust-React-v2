@@ -1,0 +1,27 @@
+.container {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.7rem;
+}
+
+@media only screen and (max-width: 1000px) {
+  .container {
+    width: 97%;
+  }
+}
+
+@media only screen and (max-width: 920px) {
+  .container {
+    width: 900px;
+    left: 20px;
+  }
+
+  .button-del {
+    position: absolute;
+    left: 0;
+  }
+}

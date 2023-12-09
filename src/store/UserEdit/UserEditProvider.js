@@ -115,7 +115,6 @@ const UserEditProvider = (props) => {
   );
 
   const setFormData = (user) => {
-    // dispatchFormAction({ type: "SET_USER", user });
     dispatchEditAction({ type: "SET_USER", user });
   };
 

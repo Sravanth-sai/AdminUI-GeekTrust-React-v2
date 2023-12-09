@@ -1,12 +1,10 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext, useCallback, useMemo } from "react";
 
 import UserContext from "../../store/User/user-context";
 
 import classes from "./Search.module.css";
 
 function Search(props) {
-  console.log("Search Rendered");
-
   const userCtx = useContext(UserContext);
   const searchRef = useRef(null);
 

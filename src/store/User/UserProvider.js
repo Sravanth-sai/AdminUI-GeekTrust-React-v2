@@ -47,14 +47,14 @@ const userReducer = (state, action) => {
 
   // Handles Updation of Users
 
-  if (action.type === "UPDATE_USER") {
+  if (action.type === "EDIT_USER") {
     // To update total users list
     let updatedTotalUsers = state.users;
     // To update only fetched users (searched users)
     let updatedFetchedUsers = state.fetchedUsers;
     let i = 0;
     let j = 0;
-    for (; i < state.totalUserCount; i++) {
+    for (let len = state.totalUserCount; i < len; i++) {
       if (updatedTotalUsers[i].id === action.id) {
         break;
       }
@@ -64,7 +64,7 @@ const userReducer = (state, action) => {
       ...action.updatedUser,
     };
 
-    for (; j < state.fetchedUserCount; j++) {
+    for (let len = state.fetchedUserCount; j < len; j++) {
       if (updatedFetchedUsers[j].id === action.id) {
         break;
       }
@@ -79,6 +79,7 @@ const userReducer = (state, action) => {
       users: updatedTotalUsers,
       fetchedUsers: updatedFetchedUsers,
       allUsersSelected: false,
+      selectedUserCount: Math.max(0, state.selectedUserCount - 1),
     };
   }
 
@@ -208,7 +209,7 @@ const userReducer = (state, action) => {
     // New Commented lines
     let updatedTotalUsers = state.users;
 
-    // let updatedFetchedUsers = state.fetchedUsers;
+    let updatedFetchedUsers = state.fetchedUsers;
 
     let currentPage = state.currentPage;
 
@@ -228,9 +229,9 @@ const userReducer = (state, action) => {
 
     // New commented users
 
-    // updatedFetchedUsers = updatedFetchedUsers.filter(
-    //   (user) => !usersMap.get(user.id)?.isChecked
-    // );
+    updatedFetchedUsers = updatedFetchedUsers.filter(
+      (user) => !usersMap.get(user.id)?.isChecked
+    );
 
     updatedTotalUsers = updatedTotalUsers.filter(
       (user) => !usersMap.get(user.id)?.isChecked
@@ -250,13 +251,13 @@ const userReducer = (state, action) => {
     return {
       currentPage: currentPage,
       users: updatedTotalUsers,
-      fetchedUsers: updatedTotalUsers,
-      // fetchedUsers: updatedFetchedUsers,
+      // fetchedUsers: updatedTotalUsers,
+      fetchedUsers: updatedFetchedUsers,
       totalUserCount: updatedTotalUsers.length,
-      // fetchedUserCount: updatedFetchedUsers.length,
-      fetchedUserCount: updatedTotalUsers.length,
-      // totalPageNumbers: Math.ceil(updatedFetchedUsers.length / 10),
-      totalPageNumbers: updatedPageNumbers,
+      fetchedUserCount: updatedFetchedUsers.length,
+      // fetchedUserCount: updatedTotalUsers.length,
+      totalPageNumbers: Math.ceil(updatedFetchedUsers.length / 10),
+      // totalPageNumbers: updatedPageNumbers,
       allUsersSelected: false,
       selectedUserCount: 0,
     };
@@ -265,28 +266,6 @@ const userReducer = (state, action) => {
 
 const UserProvider = (props) => {
   const [userState, dispatchUserAction] = useReducer(userReducer, initialState);
-
-  //   useEffect(() => {
-  //     const fetchUsers = async () => {
-  //       //   const response = await fetch(
-  //       //     "https://jsonplaceholder.typicode.com/users"
-  //       //   );
-
-  //       const response = await fetch(
-  //         "https://jsonplaceholder.typicode.com/posts"
-  //       );
-
-  //       if (!response.ok) {
-  //         return;
-  //       }
-
-  //       const data = await response.json();
-
-  //       addUsersFirstTime(data);
-  //       // setUsers(data);
-  //     };
-  //     fetchUsers();
-  //   }, []);
 
   const changePage = (page) => {
     dispatchUserAction({
@@ -319,7 +298,7 @@ const UserProvider = (props) => {
 
   const editUser = (id, updatedUser) => {
     dispatchUserAction({
-      type: "UPDATE_USER",
+      type: "EDIT_USER",
       id,
       updatedUser,
     });

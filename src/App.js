@@ -1,5 +1,5 @@
 import Search from "./Components/Search/Search";
-import User from "./Components/User/User";
+import Card from "./Components/Card/Card";
 import UserProvider from "./store/User/UserProvider";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
   return (
     <UserProvider>
       <Search />
-      <User />
+      <Card />
     </UserProvider>
   );
 }

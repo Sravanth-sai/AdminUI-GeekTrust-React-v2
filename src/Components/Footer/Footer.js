@@ -6,10 +6,10 @@ import classes from "./Footer.module.css";
 function Footer(props) {
   console.log("FOOTER Rendered");
 
+  const { currentPageUsers, totalPageNumbers, currentPage } = props;
+
   const userCtx = useContext(UserContext);
   const deleteMultipleUsersHandler = () => {
-    // New line added
-    // userCtx.removeSelectedUsers(props.currentPageUsers);
     userCtx.removeSelectedUsers(userCtx.users);
   };
 
@@ -17,13 +17,6 @@ function Footer(props) {
   const usersSelected = userCtx.selectedUserCount;
 
   content = usersSelected > 0 ? usersSelected : "No";
-
-  console.log(
-    "SELECTED USERS ",
-    userCtx.selectedUsers,
-    userCtx.selectedUsers === 0,
-    props.currentPageUsers.length === 0
-  );
 
   return (
     <div className={classes.footer}>
@@ -36,7 +29,7 @@ function Footer(props) {
         </span>
         <button
           className={classes["button-del"]}
-          disabled={props.currentPageUsers.length === 0 || usersSelected === 0}
+          disabled={currentPageUsers.length === 0 || usersSelected === 0}
           onClick={deleteMultipleUsersHandler}
         >
           Delete Selected
@@ -44,8 +37,8 @@ function Footer(props) {
       </div>
 
       <Pagination
-        totalPageNumbers={props.totalPageNumbers}
-        currentPage={props.currentPage}
+        totalPageNumbers={totalPageNumbers}
+        currentPage={currentPage}
       />
     </div>
   );

@@ -5,8 +5,6 @@ import classes from "./TableItem.module.css";
 import { FaTrash, FaEdit, FaSave, FaWindowClose } from "react-icons/fa";
 
 function TableItem(props) {
-  console.log("RECORD ITEMS Rendered");
-
   const [isEditing, setIsEditing] = useState(false);
   const userCtx = useContext(UserContext);
   const userEditCtx = useContext(UserEditContext);
@@ -78,8 +76,6 @@ function TableItem(props) {
     />
   );
 
-  console.log(name, email, role);
-
   if (isEditing) {
     content = (
       <>
@@ -113,7 +109,6 @@ function TableItem(props) {
           name={record.id}
           onChange={selectChangeHandler}
           className={classes.recordCheckbox}
-          // checked={props.allSelected}
           checked={props.isChecked}
         />
       </td>

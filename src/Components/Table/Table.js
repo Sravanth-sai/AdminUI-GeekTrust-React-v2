@@ -2,26 +2,25 @@ import { useState, useContext, useEffect } from "react";
 import UserContext from "../../store/User/user-context";
 import classes from "./Table.module.css";
 import TableItem from "./TableItem";
-import UserDeleteModal from "../User/UserDeleteModal";
+import TableItemDeleteModal from "./TableItemDeleteModal";
 import UserEditProvider from "../../store/UserEdit/UserEditProvider";
 
 function Table(props) {
-  console.log("Table Rendered");
-
   const userCtx = useContext(UserContext);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [userState, setUserState] = useState({});
   const [isAllSelected, setIsAllSelected] = useState(userCtx.allUsersSelected);
-  // const [isAllSelected, setIsAllSelected] = useState(false);
 
   useEffect(() => {
-    setIsAllSelected(props.currentRecords.every((user) => user.isChecked));
+    setIsAllSelected(
+      props.currentRecords.length > 0 &&
+        props.currentRecords.every((user) => user.isChecked)
+    );
   }, [props.currentRecords]);
 
   const recordDeleteHandler = (id, userName) => {
     setShowDeleteModal(true);
     setUserState({ id, userName });
-    // userCtx.removeUser(id);
   };
 
   const confirmedRecordDeleteHandler = () => {
@@ -34,7 +33,6 @@ function Table(props) {
     const records = props.currentRecords.map((record) => {
       return { ...record, isChecked: isChecked };
     });
-    //   setSelectedRecords(records);
     const users = { selectedUsers: records, allSelected: isChecked };
     userCtx.updateSelectedUsers(users);
   };
@@ -45,7 +43,6 @@ function Table(props) {
     // To check the shortcut checkbox when all fetched users are selected by maintaining it's state
     let allSelected = true;
     const records = props.currentRecords.map((record) => {
-      // const records = userCtx.users.map((record) => {
       let newRecord = record;
       if (record.id === eventName) {
         newRecord = { ...newRecord, isChecked };
@@ -59,7 +56,6 @@ function Table(props) {
 
   const selectChangeHandler = (event) => {
     const { name: eventName, checked: isChecked } = event.target;
-
     if (eventName === "Select-All") {
       selectAllUsers(isChecked);
     } else {
@@ -77,7 +73,6 @@ function Table(props) {
 
   return (
     <>
-      {/* <div className={classes["table-container"]}> */}
       <table className={classes.records}>
         <thead>
           <tr>
@@ -86,7 +81,6 @@ function Table(props) {
                 type="checkbox"
                 name="Select-All"
                 onChange={selectChangeHandler}
-                // checked={userCtx.allUsersSelected}
                 checked={isAllSelected}
                 className={classes.recordCheckbox}
                 disabled={props.currentRecords.length === 0}
@@ -126,7 +120,7 @@ function Table(props) {
         </tbody>
       </table>
       {showDeleteModal && (
-        <UserDeleteModal
+        <TableItemDeleteModal
           onClose={() => setShowDeleteModal(false)}
           user={userState.userName}
           deleteHandler={confirmedRecordDeleteHandler}
