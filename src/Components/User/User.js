@@ -2,11 +2,9 @@ import { useState, useContext, useEffect, useMemo } from "react";
 import UserContext from "../../store/User/user-context";
 import Table from "../Table/Table";
 import Footer from "../Footer/Footer";
-import classes from "./Card.module.css";
+import classes from "./User.module.css";
 
-function Card() {
-  console.log("USERS Rendered");
-
+function User() {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const userCtx = useContext(UserContext);
@@ -36,7 +34,6 @@ function Card() {
   }, []);
 
   const currentPage = useMemo(() => {
-    console.log("USE MEMO ", userCtx.currentPage);
     return userCtx.currentPage;
   }, [userCtx.currentPage]);
 
@@ -44,17 +41,13 @@ function Card() {
   const startIndex = (currentPage - 1) * usersPerPage;
   const lastIndex = currentPage * usersPerPage;
 
-  const totalPageNumbers = userCtx.totalPageNumbers;
+  const totalPageNumbers = useMemo(() => {
+    return userCtx.totalPageNumbers;
+  }, [userCtx.totalPageNumbers]);
 
-  // const totalPageNumbers = useMemo(() => {
-  //   return userCtx.totalPageNumbers;
-  // }, [userCtx.totalPageNumbers]);
-
-  const fetchedUsers = userCtx.fetchedUsers;
-
-  // const fetchedUsers = useMemo(() => {
-  //   return userCtx.fetchedUsers;
-  // }, [userCtx.fetchedUsers]);
+  const fetchedUsers = useMemo(() => {
+    return userCtx.fetchedUsers;
+  }, [userCtx.fetchedUsers]);
 
   const currentPageUsers = fetchedUsers.slice(startIndex, lastIndex);
 
@@ -76,4 +69,4 @@ function Card() {
   );
 }
 
-export default Card;
+export default User;

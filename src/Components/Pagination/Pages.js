@@ -1,8 +1,6 @@
 import classes from "./Pages.module.css";
 
 function Pages(props) {
-  console.log("PAGES (NUMBERS) Rendered");
-
   const { currentPage, totalPageNumbers } = props;
 
   let pageNumbers = [];
@@ -50,7 +48,6 @@ function Pages(props) {
         )}
         <button
           className={`${classes.paginationItems} ${classes.page} ${classes.activePage}`}
-          // onClick={() => props.onPageChange(currentPage)}
           key={currentPage}
         >
           {currentPage}

@@ -4,8 +4,6 @@ import Pagination from "../Pagination/Pagination";
 import classes from "./Footer.module.css";
 
 function Footer(props) {
-  console.log("FOOTER Rendered");
-
   const { currentPageUsers, totalPageNumbers, currentPage } = props;
 
   const userCtx = useContext(UserContext);

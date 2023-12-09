@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import Modal from "../UI/Modal";
-import classes from "./TableItemDeleteModal.module.css";
+import classes from "./UserDeleteModal.module.css";
 
-function TableItemDeleteModal(props) {
+function UserDeleteModal(props) {
   const content = (
     <Fragment>
       <h2>Are you sure to delete {props.user} user entry?</h2>
@@ -30,4 +30,4 @@ function TableItemDeleteModal(props) {
   return <Modal onClose={props.onClose}>{content}</Modal>;
 }
 
-export default TableItemDeleteModal;
+export default UserDeleteModal;

@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import UserContext from "../../store/User/user-context";
 import classes from "./Table.module.css";
 import TableItem from "./TableItem";
-import TableItemDeleteModal from "./TableItemDeleteModal";
+import UserDeleteModal from "../User/UserDeleteModal";
 import UserEditProvider from "../../store/UserEdit/UserEditProvider";
 
 function Table(props) {
@@ -120,7 +120,7 @@ function Table(props) {
         </tbody>
       </table>
       {showDeleteModal && (
-        <TableItemDeleteModal
+        <UserDeleteModal
           onClose={() => setShowDeleteModal(false)}
           user={userState.userName}
           deleteHandler={confirmedRecordDeleteHandler}

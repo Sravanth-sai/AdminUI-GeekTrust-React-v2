@@ -10,8 +10,6 @@ import {
 } from "react-icons/fa";
 
 function Pagination(props) {
-  console.log("PAGINATION Rendered");
-
   const { currentPage, totalPageNumbers } = props;
   const userCtx = useContext(UserContext);
   const onFirstPageHandler = () => {
@@ -65,7 +63,6 @@ function Pagination(props) {
       >
         <FaAngleLeft />
       </button>
-      {/* <div className={classes["pages-container"]}>{content}</div> */}
       <Pages
         totalPageNumbers={totalPageNumbers}
         currentPage={currentPage}

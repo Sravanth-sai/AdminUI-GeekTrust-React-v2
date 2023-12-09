@@ -40,7 +40,6 @@ const userEditReducer = (state, action) => {
         },
       };
     case "EDIT_NAME":
-      console.log("NAME ", action.name);
       const name = action.name;
       let isNameValid = true;
       let nameErr = "";

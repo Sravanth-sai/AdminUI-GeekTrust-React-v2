@@ -33,8 +33,6 @@ const userReducer = (state, action) => {
       return { ...user, isChecked: false };
     });
 
-    console.log("INITIAL STATE ", state);
-
     return {
       ...state,
       users: updatedUsers,
@@ -86,7 +84,6 @@ const userReducer = (state, action) => {
   // Handles Fetch Users by 'keyword'
 
   if (action.type === "FETCH_USERS") {
-    console.log("HERE 2");
     if (action.key.trim() === "") {
       return {
         ...state,
@@ -147,8 +144,6 @@ const userReducer = (state, action) => {
       }
       // usersMap.has(user.id) ?  : user
     );
-
-    console.log("SELECCTED USRES ", selectedUserCount);
 
     return {
       ...state,
@@ -245,8 +240,6 @@ const userReducer = (state, action) => {
     if (currentPage > updatedPageNumbers) {
       currentPage = updatedPageNumbers;
     }
-
-    console.log(currentPage, state.totalPageNumbers);
 
     return {
       currentPage: currentPage,
